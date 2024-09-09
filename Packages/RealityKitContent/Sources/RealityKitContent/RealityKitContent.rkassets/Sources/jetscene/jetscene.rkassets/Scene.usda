@@ -1,0 +1,644 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 1.0 (409.60.6)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["JetEngine_Combine", "PB_JetEngine_Combine", "Jet_Engine_Combine", "Jet_Engine_Combine_1", "metal"]
+    def "PB_JetEngine_Combine" (
+        active = true
+        references = @Mesh/Jet_Engine_Combine/PB_JetEngine_Combine.usdz@
+    )
+    {
+        float3 xformOp:translate = (-777.1102, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "SM_Black"
+            {
+                token inputs:frame:stPrimvarName = "st"
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "SM_BlackPreviewSurface"
+                {
+                    color3f inputs:diffuseColor = (0.046277773, 0.046277773, 0.046277773) (
+                        colorSpace = "lin_srgb"
+                    )
+                    color3f inputs:diffuseColor.connect = </Root/PB_JetEngine_Combine/Materials/SM_Black/diffuseColor.outputs:rgb>
+                    normal3f inputs:normal.connect = </Root/PB_JetEngine_Combine/Materials/SM_Black/normal.outputs:rgb>
+                    float inputs:roughness = 0.4
+                    float inputs:roughness.connect = </Root/PB_JetEngine_Combine/Materials/SM_Black/roughness.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Plastic_Shiny_2K_albedo.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Combine/Materials/SM_Black/diffuseColor/TexCoordReader.outputs:result>
+                    color3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Combine/Materials/SM_Black/SM_BlackPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "roughness"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Plastic_Shiny_2K_roughness.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Combine/Materials/SM_Black/roughness/TexCoordReader.outputs:result>
+                    float outputs:r
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Combine/Materials/SM_Black/SM_BlackPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "normal"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Plastic_Shiny_2K_normal.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Combine/Materials/SM_Black/normal/TexCoordReader.outputs:result>
+                    normal3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Combine/Materials/SM_Black/SM_BlackPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "SM_Metal"
+            {
+                token inputs:frame:stPrimvarName = "st"
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "SM_MetalPreviewSurface"
+                {
+                    color3f inputs:diffuseColor = (0.97007865, 0.97007865, 0.97007865) (
+                        colorSpace = "lin_srgb"
+                    )
+                    delete color3f inputs:diffuseColor.connect = </Root/PB_JetEngine_Combine/Materials/SM_Metal/diffuseColor.outputs:rgb>
+                    prepend color3f inputs:diffuseColor.connect = </Root/PB_JetEngine_Combine/Materials/SM_Metal/diffuseColor.outputs:rgb>
+                    float inputs:metallic = 0.8
+                    float inputs:metallic.connect = None
+                    normal3f inputs:normal = (0, 0, 0)
+                    normal3f inputs:normal.connect = None
+                    float inputs:roughness = 0
+                    float inputs:roughness.connect = </Root/PB_JetEngine_Combine/Materials/SM_Metal/roughness.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Metal_AluminumBrushed2_2K_albedo.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Combine/Materials/SM_Metal/diffuseColor/TexCoordReader.outputs:result>
+                    color3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Combine/Materials/SM_Metal/SM_MetalPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "roughness"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Metal_AluminumBrushed2_2K_roughness.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Combine/Materials/SM_Metal/roughness/TexCoordReader.outputs:result>
+                    float outputs:r
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Combine/Materials/SM_Metal/SM_MetalPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "metallic"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @TCom_BrushedStainlessSteel_2K_metallic.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Combine/Materials/SM_Metal/metallic/TexCoordReader.outputs:result>
+                    float outputs:r
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Combine/Materials/SM_Metal/SM_MetalPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "normal"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Metal_AluminumBrushed2_2K_normal.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Combine/Materials/SM_Metal/normal/TexCoordReader.outputs:result>
+                    normal3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Combine/Materials/SM_Metal/SM_MetalPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "defaultMaterial"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "Shader"
+                {
+                    color3f inputs:diffuseColor = (1, 0.0894983, 0.104673326) (
+                        colorSpace = "lin_srgb"
+                    )
+                }
+            }
+        }
+
+        over "PB_JetEngine"
+        {
+            over "SM_JetEngine"
+            {
+                quatf xformOp:orient = (1, 0, 0, 0)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                over "SM_HalfRight" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding = </Root/PB_JetEngine_Combine/Materials/SM_Metal> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+
+                    over "SM_HalfRight_geometry" (
+                        prepend apiSchemas = ["MaterialBindingAPI"]
+                    )
+                    {
+                        rel material:binding = </Root/PB_JetEngine_Combine/Materials/SM_Black> (
+                            bindMaterialAs = "weakerThanDescendants"
+                        )
+                        quatf xformOp:orient = (1, 0, 0, 0)
+                        float3 xformOp:scale = (1, 1, 1)
+                        float3 xformOp:translate = (0, 0, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                        over "SM_Metal_subset" (
+                            prepend apiSchemas = ["MaterialBindingAPI"]
+                        )
+                        {
+                            rel material:binding = </Root/PB_JetEngine_Combine/Materials/SM_Metal> (
+                                bindMaterialAs = "weakerThanDescendants"
+                            )
+                        }
+                    }
+                }
+
+                over "SM_HalfLeft" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding = </Root/PB_JetEngine_Combine/Materials/SM_Metal> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+
+                    over "SM_HalfLeft_geometry" (
+                        prepend apiSchemas = ["MaterialBindingAPI"]
+                    )
+                    {
+                        rel material:binding = </Root/PB_JetEngine_Combine/Materials/SM_Metal> (
+                            bindMaterialAs = "weakerThanDescendants"
+                        )
+                        quatf xformOp:orient = (1, 0, 0, 0)
+                        float3 xformOp:scale = (1, 1, 1)
+                        float3 xformOp:translate = (0, 0, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+                }
+
+                over "SM_Fan" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding = </Root/metal> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+
+                    over "SM_Fan_geometry" (
+                        prepend apiSchemas = ["MaterialBindingAPI"]
+                    )
+                    {
+                        rel material:binding = </Root/PB_JetEngine_Combine/Materials/SM_Black> (
+                            bindMaterialAs = "weakerThanDescendants"
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    def "PB_JetEngine_Run" (
+        active = true
+        prepend references = @Mesh/Jet_Engine_Run/PB_JetEngine_Run.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (649.9015, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "SM_Metal"
+            {
+                token inputs:frame:stPrimvarName = "st"
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "SM_MetalPreviewSurface"
+                {
+                    color3f inputs:diffuseColor.connect = </Root/PB_JetEngine_Run/Materials/SM_Metal/diffuseColor.outputs:rgb>
+                    float inputs:metallic = 0.5
+                    float inputs:roughness = 0.3
+                    float inputs:roughness.connect = </Root/PB_JetEngine_Run/Materials/SM_Metal/roughness.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Metal_AluminumBrushed2_2K_albedo.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Run/Materials/SM_Metal/diffuseColor/TexCoordReader.outputs:result>
+                    color3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Run/Materials/SM_Metal/SM_MetalPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "roughness"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Metal_AluminumBrushed2_2K_roughness.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Run/Materials/SM_Metal/roughness/TexCoordReader.outputs:result>
+                    float outputs:r
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Run/Materials/SM_Metal/SM_MetalPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "SM_Black"
+            {
+                token inputs:frame:stPrimvarName = "st"
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "SM_BlackPreviewSurface"
+                {
+                    color3f inputs:diffuseColor = (0.055020332, 0.055020332, 0.055020332) (
+                        colorSpace = "lin_srgb"
+                    )
+                    color3f inputs:diffuseColor.connect = </Root/PB_JetEngine_Run/Materials/SM_Black/diffuseColor.outputs:rgb>
+                    normal3f inputs:normal.connect = </Root/PB_JetEngine_Run/Materials/SM_Black/normal.outputs:rgb>
+                    float inputs:roughness = 0.4
+                    float inputs:roughness.connect = </Root/PB_JetEngine_Run/Materials/SM_Black/roughness.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Plastic_Shiny_2K_albedo.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Run/Materials/SM_Black/diffuseColor/TexCoordReader.outputs:result>
+                    color3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Run/Materials/SM_Black/SM_BlackPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "roughness"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Plastic_Shiny_2K_roughness.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Run/Materials/SM_Black/roughness/TexCoordReader.outputs:result>
+                    float outputs:r
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Run/Materials/SM_Black/SM_BlackPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "normal"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Plastic_Shiny_2K_normal.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Run/Materials/SM_Black/normal/TexCoordReader.outputs:result>
+                    normal3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Run/Materials/SM_Black/SM_BlackPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "defaultMaterial"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+            }
+        }
+    }
+
+    def "PB_JetEngine_RunFast" (
+        active = true
+        prepend references = @Mesh/Jet_Engine_Run_Fast/PB_JetEngine_RunFast.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "SM_Metal"
+            {
+                token inputs:frame:stPrimvarName = "st"
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "SM_MetalPreviewSurface"
+                {
+                    color3f inputs:diffuseColor.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Metal/diffuseColor.outputs:rgb>
+                    float inputs:metallic = 0.6
+                    float inputs:roughness = 0.3
+                    float inputs:roughness.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Metal/roughness.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Metal_AluminumBrushed2_2K_albedo.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Metal/diffuseColor/TexCoordReader.outputs:result>
+                    color3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Metal/SM_MetalPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "roughness"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Metal_AluminumBrushed2_2K_roughness.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Metal/roughness/TexCoordReader.outputs:result>
+                    float outputs:r
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Metal/SM_MetalPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "SM_Black"
+            {
+                token inputs:frame:stPrimvarName = "st"
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "SM_BlackPreviewSurface"
+                {
+                    color3f inputs:diffuseColor = (0.09016263, 0.09016263, 0.09016263) (
+                        colorSpace = "lin_srgb"
+                    )
+                    color3f inputs:diffuseColor.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Black/diffuseColor.outputs:rgb>
+                    normal3f inputs:normal.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Black/normal.outputs:rgb>
+                    float inputs:roughness = 0.3
+                    float inputs:roughness.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Black/roughness.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Plastic_Shiny_2K_albedo.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Black/diffuseColor/TexCoordReader.outputs:result>
+                    color3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Black/SM_BlackPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "roughness"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Plastic_Shiny_2K_roughness.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Black/roughness/TexCoordReader.outputs:result>
+                    float outputs:r
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Black/SM_BlackPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "normal"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Plastic_Shiny_2K_normal.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Black/normal/TexCoordReader.outputs:result>
+                    normal3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_RunFast/Materials/SM_Black/SM_BlackPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+        }
+    }
+
+    def "PB_JetEngine_Seperate" (
+        active = true
+        prepend references = @Mesh/Jet_Engine_Seperate/PB_JetEngine_Seperate.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (1150.9148, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "SM_Metal"
+            {
+                token inputs:frame:stPrimvarName = "st"
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "SM_MetalPreviewSurface"
+                {
+                    color3f inputs:diffuseColor = (0.8881537, 0.8881537, 0.8881537) (
+                        colorSpace = "lin_srgb"
+                    )
+                    color3f inputs:diffuseColor.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Metal/diffuseColor.outputs:rgb>
+                    float inputs:metallic = 0.7
+                    float inputs:roughness = 0.2
+                    float inputs:roughness.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Metal/roughness.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Metal_AluminumBrushed2_2K_albedo.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Metal/diffuseColor/TexCoordReader.outputs:result>
+                    color3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Metal/SM_MetalPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "roughness"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Metal_AluminumBrushed2_2K_roughness.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Metal/roughness/TexCoordReader.outputs:result>
+                    float outputs:r
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Metal/SM_MetalPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "SM_Black"
+            {
+                token inputs:frame:stPrimvarName = "st"
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "SM_BlackPreviewSurface"
+                {
+                    color3f inputs:diffuseColor = (0.053877685, 0.053877685, 0.053877685) (
+                        colorSpace = "lin_srgb"
+                    )
+                    color3f inputs:diffuseColor.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Black/diffuseColor.outputs:rgb>
+                    normal3f inputs:normal.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Black/normal.outputs:rgb>
+                    float inputs:roughness = 0.3
+                    float inputs:roughness.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Black/roughness.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Plastic_Shiny_2K_albedo.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Black/diffuseColor/TexCoordReader.outputs:result>
+                    color3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Black/SM_BlackPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "roughness"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Plastic_Shiny_2K_roughness.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Black/roughness/TexCoordReader.outputs:result>
+                    float outputs:r
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Black/SM_BlackPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "normal"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @texture/TCom_Plastic_Shiny_2K_normal.tif@
+                    float2 inputs:st.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Black/normal/TexCoordReader.outputs:result>
+                    normal3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/PB_JetEngine_Seperate/Materials/SM_Black/SM_BlackPreviewSurface.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "defaultMaterial"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+            }
+        }
+    }
+}
+

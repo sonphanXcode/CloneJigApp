@@ -1,0 +1,191 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.0.10.0.2)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def "PB_JetEngine_RunFast" (
+        active = true
+        prepend references = @Sources/jetscene/jetscene.rkassets/Mesh/Jet_Engine_Run_Fast/PB_JetEngine_RunFast.usdz@
+    )
+    {
+        float3 xformOp:scale = (0.002, 0.002, 0.002)
+        float3 xformOp:translate = (-0.00002940977, 0.3034643, -1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "PB_JetEngine"
+        {
+            over "SM_JetEngine"
+            {
+                quatf xformOp:orient = (1, 0, 0, 0)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                over "SM_Engine2"
+                {
+                    over "SM_Engine2_geometry"
+                    {
+                        quatf xformOp:orient = (1, 0, 0, 0)
+                        float3 xformOp:scale = (1, 1, 1)
+                        float3 xformOp:translate = (10842, 0.921875, 78632.234)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                        def RealityKitComponent "Collider"
+                        {
+                            uint group = 1
+                            uniform token info:id = "RealityKit.Collider"
+                            uint mask = 4294967295
+                            token type = "Default"
+
+                            def RealityKitStruct "Shape"
+                            {
+                                float3 extent = (46721.98, 16808.125, 16808.127)
+                                token shapeType = "Box"
+
+                                def RealityKitStruct "pose"
+                                {
+                                    float3 position = (13114.736, -0.30126953, 0.0107421875)
+                                }
+                            }
+                        }
+
+                        def RealityKitComponent "InputTarget"
+                        {
+                            uniform token info:id = "RealityKit.InputTarget"
+                        }
+
+                        def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+                        {
+                            uniform token info:id = "RealityKitContent.GestureComponent"
+                            bool preserveOrientationOnPivotDrag = 0
+                        }
+                    }
+                }
+
+                over "SM_Engine1"
+                {
+                    over "SM_Engine1_geometry"
+                    {
+                        quatf xformOp:orient = (1, 0, 0, 0)
+                        float3 xformOp:scale = (1, 1, 1)
+                        float3 xformOp:translate = (-0.03125, 0.203125, 41110.668)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def RealityKitComponent "Collider"
+                    {
+                        uint group = 1
+                        uniform token info:id = "RealityKit.Collider"
+                        uint mask = 4294967295
+                        token type = "Default"
+
+                        def RealityKitStruct "Shape"
+                        {
+                            float3 extent = (71863.11, 30221.848, 30221.844)
+                            token shapeType = "Box"
+
+                            def RealityKitStruct "pose"
+                            {
+                                float3 position = (1099.5996, 0.19433594, 41137.53)
+                            }
+                        }
+                    }
+
+                    def RealityKitComponent "InputTarget"
+                    {
+                        uniform token info:id = "RealityKit.InputTarget"
+                    }
+
+                    def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+                    {
+                        uniform token info:id = "RealityKitContent.GestureComponent"
+                        bool preserveOrientationOnPivotDrag = 0
+                    }
+                }
+
+                over "SM_Fan"
+                {
+                    over "SM_Fan_geometry"
+                    {
+                        quatf xformOp:orient = (1, 0, 0, 0)
+                        float3 xformOp:scale = (1, 1, 1)
+                        float3 xformOp:translate = (275.21597, 0.00006103516, 0.00012207033)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+                    {
+                        bool canRotate = 1
+                        uniform token info:id = "RealityKitContent.GestureComponent"
+                        bool preserveOrientationOnPivotDrag = 0
+                    }
+
+                    def RealityKitComponent "InputTarget"
+                    {
+                        uniform token info:id = "RealityKit.InputTarget"
+                    }
+
+                    def RealityKitComponent "Collider"
+                    {
+                        uint group = 1
+                        uniform token info:id = "RealityKit.Collider"
+                        uint mask = 4294967295
+                        token type = "Default"
+
+                        def RealityKitStruct "Shape"
+                        {
+                            float3 extent = (184.92236, 184.92235, 71.78926)
+                            token shapeType = "Box"
+
+                            def RealityKitStruct "pose"
+                            {
+                                float3 position = (275.21597, 0.000061035156, 12.909574)
+                            }
+                        }
+                    }
+                }
+
+                over "SM_HalfLeft"
+                {
+                    def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+                    {
+                        uniform token info:id = "RealityKitContent.GestureComponent"
+                        bool preserveOrientationOnPivotDrag = 0
+                    }
+
+                    def RealityKitComponent "Collider"
+                    {
+                        uint group = 1
+                        uniform token info:id = "RealityKit.Collider"
+                        uint mask = 4294967295
+                        token type = "Default"
+
+                        def RealityKitStruct "Shape"
+                        {
+                            float3 extent = (173.73596, 374.9756, 295.21527)
+                            token shapeType = "Box"
+
+                            def RealityKitStruct "pose"
+                            {
+                                float3 position = (-67.70065, 87.48774, -1.4024734)
+                            }
+                        }
+                    }
+
+                    def RealityKitComponent "InputTarget"
+                    {
+                        uniform token info:id = "RealityKit.InputTarget"
+                    }
+                }
+            }
+        }
+    }
+}
+
